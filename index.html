@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carlos Filho — Designer Gráfico</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111;
+            color: #fff;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+
+        .hero {
+            max-width: 1000px;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 10vw, 150px);
+            line-height: 0.9;
+            letter-spacing: -6px;
+        }
+
+        .hero p {
+            margin-top: 40px;
+            font-size: 22px;
+            max-width: 600px;
+            line-height: 1.4;
+        }
+
+        .projects {
+            padding: 100px 40px;
+            background: #f2f2f2;
+            color: #111;
+        }
+
+        .projects h2 {
+            font-size: 60px;
+            margin-bottom: 60px;
+        }
+
+        .project {
+            border-top: 2px solid #111;
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project h3 {
+            font-size: 32px;
+        }
+
+        .project span {
+            font-size: 16px;
+        }
+
+        footer {
+            padding: 60px 40px;
+            background: #111;
+        }
+
+        footer h2 {
+            font-size: 50px;
+            margin-bottom: 30px;
+        }
+
+        footer a {
+            color: #fff;
+        }
+
+        @media (max-width: 700px) {
+            header,
+            .projects,
+            footer {
+                padding: 25px;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .projects h2 {
+                font-size: 42px;
+            }
+
+            .project {
+                display: block;
+            }
+
+            .project span {
+                display: block;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+            <div class="logo">CF.</div>
+
+            <div>
+                <a href="#projetos">Projetos</a>
+                <a href="#contato">Contato</a>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <h1>
+                CARLOS<br>
+                FILHO
+            </h1>
+
+            <p>
+                Designer gráfico e diretor de arte.
+                Crio identidades, campanhas e experiências visuais
+                para marcas, projetos e pessoas.
+            </p>
+        </div>
+
+        <div>
+            ↓ Conheça meu trabalho
+        </div>
+
+    </header>
+
+
+    <section class="projects" id="projetos">
+
+        <h2>Projetos</h2>
+
+        <div class="project">
+            <h3>Foco Radical</h3>
+            <span>Branding · Campanhas · Digital</span>
+        </div>
+
+        <div class="project">
+            <h3>Fotos By</h3>
+            <span>Branding · Eventos · Comunicação</span>
+        </div>
+
+        <div class="project">
+            <h3>Identidade Visual</h3>
+            <span>Branding · Direção de arte</span>
+        </div>
+
+        <div class="project">
+            <h3>Projetos pessoais</h3>
+            <span>Música · Arte · Experimentação</span>
+        </div>
+
+    </section>
+
+
+    <footer id="contato">
+
+        <h2>Vamos conversar?</h2>
+
+        <p>
+            <a href="mailto:seuemail@email.com">
+                seuemail@email.com
+            </a>
+        </p>
+
+    </footer>
+
+</body>
+</html>
