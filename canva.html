@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canva — Portfólio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f3;
+            color: #111;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 32px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .back {
+            color: #111;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .intro {
+            padding: 100px 0 80px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .number {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(65px, 11vw, 160px);
+            letter-spacing: -0.09em;
+            line-height: 0.95;
+            margin: 0 0 35px;
+        }
+
+        .description {
+            max-width: 650px;
+            font-size: 17px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 65px 0 30px;
+        }
+
+        h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            letter-spacing: -0.055em;
+            margin: 0;
+        }
+
+        .count {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            padding-bottom: 120px;
+        }
+
+        .gallery img {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: #e6e6e6;
+        }
+
+        footer {
+            border-top: 1px solid #ccc;
+            padding: 35px 0;
+            font-size: 12px;
+            color: #777;
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .intro {
+                padding: 70px 0 55px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .section-header {
+                padding-top: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="back">← VOLTAR AO PORTFÓLIO</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <div class="number">02 / PROJETOS</div>
+            <h1>Canva<span style="color:#888;">.</span></h1>
+
+            <p class="description">
+                Criação de templates e materiais digitais para redes sociais,
+                explorando diferentes linguagens visuais, composições
+                tipográficas e soluções gráficas.
+            </p>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Conteúdo digital</h2>
+                <span class="count">22 PEÇAS</span>
+            </div>
+
+            <div class="gallery" id="gallery"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            PORTFÓLIO — DESIGN GRÁFICO
+        </div>
+    </footer>
+
+    <script>
+        const gallery = document.getElementById('gallery');
+
+        const files = [
+            'unnamed.jpg',
+            ...Array.from(
+                { length: 21 },
+                (_, i) => `unnamed (${i + 1}).jpg`
+            )
+        ];
+
+        files.forEach((file, index) => {
+            const img = document.createElement('img');
+            img.src = `images/canva/${encodeURIComponent(file)}`;
+            img.alt = `Conteúdo digital Canva — peça ${index + 1}`;
+            img.loading = 'lazy';
+            gallery.appendChild(img);
+        });
+    </script>
+</body>
+</html>
