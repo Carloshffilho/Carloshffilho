@@ -87,17 +87,68 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
             padding-bottom: 120px;
         }
 
-        .gallery img {
+        .thumbnail {
             display: block;
             width: 100%;
-            height: auto;
+            aspect-ratio: 1 / 1;
+            border: 0;
+            padding: 0;
             background: #e6e6e6;
+            cursor: zoom-in;
+            overflow: hidden;
         }
+
+        .thumbnail img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .25s ease;
+        }
+
+        .thumbnail:hover img { transform: scale(1.045); }
+        .thumbnail:focus-visible { outline: 3px solid #e30000; outline-offset: 3px; }
+
+        .lightbox[hidden] { display: none; }
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(12, 12, 12, .97);
+            color: #fff;
+            padding: 65px 70px 65px;
+        }
+        .lightbox-image {
+            display: block;
+            max-width: 100%;
+            max-height: calc(100dvh - 150px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .lightbox-close, .lightbox-arrow {
+            position: absolute;
+            border: 1px solid rgba(255,255,255,.45);
+            background: rgba(0,0,0,.35);
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .lightbox-close { top: 18px; right: 22px; width: 44px; height: 44px; font-size: 28px; }
+        .lightbox-arrow { top: 50%; transform: translateY(-50%); width: 46px; height: 58px; font-size: 30px; }
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+        .lightbox-count { position: absolute; bottom: 25px; font-size: 12px; letter-spacing: .1em; }
+        .lightbox button:focus-visible { outline: 2px solid white; outline-offset: 3px; }
 
         footer {
             border-top: 1px solid #ccc;
@@ -115,20 +166,24 @@
                 padding: 70px 0 55px;
             }
 
-            .gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 12px;
-            }
 
             .section-header {
                 padding-top: 45px;
             }
         }
 
+        @media (max-width: 1000px) {
+            .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+        @media (max-width: 700px) {
+            .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .lightbox { padding: 65px 48px; }
+            .lightbox-arrow { width: 36px; height: 48px; font-size: 23px; }
+            .lightbox-prev { left: 5px; }
+            .lightbox-next { right: 5px; }
+        }
         @media (max-width: 480px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
+            .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
     </style>
 </head>
@@ -162,6 +217,14 @@
         </section>
     </main>
 
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualização ampliada dos trabalhos" hidden>
+        <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Fechar imagem">×</button>
+        <button type="button" class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Imagem anterior">‹</button>
+        <img class="lightbox-image" id="lightbox-image" alt="">
+        <button type="button" class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Próxima imagem">›</button>
+        <div class="lightbox-count" id="lightbox-count" aria-live="polite"></div>
+    </div>
+
     <footer>
         <div class="container">
             PORTFÓLIO — DESIGN GRÁFICO
@@ -179,13 +242,80 @@
             )
         ];
 
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCount = document.getElementById('lightbox-count');
+        const closeButton = document.getElementById('lightbox-close');
+        let currentIndex = 0;
+        let lastFocused = null;
+        let touchStartX = null;
+
+        const imageUrl = file => `images/canva/${encodeURIComponent(file)}`;
+
+        function showImage(index) {
+            currentIndex = (index + files.length) % files.length;
+            lightboxImage.src = imageUrl(files[currentIndex]);
+            lightboxImage.alt = `Conteúdo digital Canva — peça ${currentIndex + 1}`;
+            lightboxCount.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(files.length).padStart(2, '0')}`;
+        }
+
+        function openLightbox(index) {
+            lastFocused = document.activeElement;
+            showImage(index);
+            lightbox.hidden = false;
+            document.body.style.overflow = 'hidden';
+            closeButton.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.hidden = true;
+            document.body.style.overflow = '';
+            lightboxImage.removeAttribute('src');
+            if (lastFocused) lastFocused.focus();
+        }
+
         files.forEach((file, index) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'thumbnail';
+            button.setAttribute('aria-label', `Ampliar trabalho ${index + 1} de ${files.length}`);
             const img = document.createElement('img');
-            img.src = `images/canva/${encodeURIComponent(file)}`;
+            img.src = imageUrl(file);
             img.alt = `Conteúdo digital Canva — peça ${index + 1}`;
             img.loading = 'lazy';
-            gallery.appendChild(img);
+            button.appendChild(img);
+            button.addEventListener('click', () => openLightbox(index));
+            gallery.appendChild(button);
         });
+
+        closeButton.addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-prev').addEventListener('click', () => showImage(currentIndex - 1));
+        document.getElementById('lightbox-next').addEventListener('click', () => showImage(currentIndex + 1));
+        lightbox.addEventListener('click', event => {
+            if (event.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', event => {
+            if (lightbox.hidden) return;
+            if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'ArrowLeft') showImage(currentIndex - 1);
+            if (event.key === 'ArrowRight') showImage(currentIndex + 1);
+            if (event.key === 'Tab') {
+                const controls = [...lightbox.querySelectorAll('button')];
+                const first = controls[0];
+                const last = controls[controls.length - 1];
+                if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+                else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+            }
+        });
+        lightbox.addEventListener('touchstart', event => {
+            touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+        lightbox.addEventListener('touchend', event => {
+            if (touchStartX === null) return;
+            const delta = event.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(delta) > 50) showImage(currentIndex + (delta < 0 ? 1 : -1));
+            touchStartX = null;
+        }, { passive: true });
     </script>
 </body>
 </html>
