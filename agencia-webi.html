@@ -89,18 +89,97 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
             padding-bottom: 120px;
-            align-items: start;
         }
 
-        .gallery img {
+        .thumbnail {
             display: block;
             width: 100%;
-            height: auto;
+            aspect-ratio: 1 / 1;
+            padding: 0;
+            border: 1px solid #ddd;
             background: #e6e6e6;
+            cursor: zoom-in;
+            overflow: hidden;
         }
+
+        .thumbnail img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .25s ease;
+        }
+
+        .thumbnail:hover img { transform: scale(1.05); }
+        .thumbnail:focus-visible { outline: 3px solid #e30000; outline-offset: 3px; }
+
+        .lightbox[hidden] { display: none; }
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            background: rgba(10, 10, 10, .97);
+            color: #fff;
+        }
+
+        .lightbox-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            gap: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .05em;
+        }
+
+        .lightbox-close, .lightbox-arrow {
+            border: 0;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .lightbox-close { font-size: 30px; line-height: 1; padding: 4px 10px; }
+        .lightbox-viewer {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 85px 24px;
+        }
+
+        .lightbox-image {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 16px;
+            font-size: 36px;
+            line-height: 1;
+        }
+
+        .lightbox-prev { left: 16px; }
+        .lightbox-next { right: 16px; }
+        .lightbox-close:hover, .lightbox-arrow:hover { color: #aaa; }
+        .lightbox button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+        body.lightbox-open { overflow: hidden; }
 
         footer {
             border-top: 1px solid #ccc;
@@ -119,7 +198,7 @@
             }
 
             .gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap: 12px;
             }
 
@@ -130,8 +209,13 @@
 
         @media (max-width: 480px) {
             .gallery {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
+            .lightbox-top { padding: 14px 16px; }
+            .lightbox-viewer { padding: 0 45px 18px; }
+            .lightbox-arrow { font-size: 26px; padding: 8px; }
+            .lightbox-prev { left: 4px; }
+            .lightbox-next { right: 4px; }
         }
     </style>
 </head>
@@ -174,6 +258,18 @@
         </div>
     </footer>
 
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualização ampliada das peças" hidden>
+        <div class="lightbox-top">
+            <span id="lightbox-counter" aria-live="polite">01 / 14</span>
+            <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Fechar imagem">×</button>
+        </div>
+        <div class="lightbox-viewer" id="lightbox-viewer">
+            <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" type="button" aria-label="Imagem anterior">←</button>
+            <img class="lightbox-image" id="lightbox-image" alt="">
+            <button class="lightbox-arrow lightbox-next" id="lightbox-next" type="button" aria-label="Próxima imagem">→</button>
+        </div>
+    </div>
+
     <script>
         const gallery = document.getElementById('gallery');
 
@@ -182,15 +278,82 @@
             (_, i) => `${i + 1}.png`
         );
 
-        files.forEach((file, index) => {
-            const img = document.createElement('img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const counter = document.getElementById('lightbox-counter');
+        const closeButton = document.getElementById('lightbox-close');
+        let currentIndex = 0;
+        let previousFocus = null;
+        let touchStartX = null;
 
+        function showImage(index) {
+            currentIndex = (index + files.length) % files.length;
+            lightboxImage.src = `images/agencia-webi/${files[currentIndex]}`;
+            lightboxImage.alt = `Agência WEBi — peça ${currentIndex + 1}`;
+            counter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(files.length).padStart(2, '0')}`;
+        }
+
+        function openLightbox(index) {
+            previousFocus = document.activeElement;
+            showImage(index);
+            lightbox.hidden = false;
+            document.body.classList.add('lightbox-open');
+            closeButton.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.hidden = true;
+            document.body.classList.remove('lightbox-open');
+            lightboxImage.removeAttribute('src');
+            if (previousFocus) previousFocus.focus();
+        }
+
+        files.forEach((file, index) => {
+            const button = document.createElement('button');
+            button.className = 'thumbnail';
+            button.type = 'button';
+            button.setAttribute('aria-label', `Ampliar peça ${index + 1} de ${files.length}`);
+            const img = document.createElement('img');
             img.src = `images/agencia-webi/${file}`;
             img.alt = `Agência WEBi — peça ${index + 1}`;
             img.loading = 'lazy';
-
-            gallery.appendChild(img);
+            button.appendChild(img);
+            button.addEventListener('click', () => openLightbox(index));
+            gallery.appendChild(button);
         });
+
+        document.getElementById('lightbox-prev').addEventListener('click', () => showImage(currentIndex - 1));
+        document.getElementById('lightbox-next').addEventListener('click', () => showImage(currentIndex + 1));
+        closeButton.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', event => {
+            if (event.target === lightbox || event.target.id === 'lightbox-viewer') closeLightbox();
+        });
+        document.addEventListener('keydown', event => {
+            if (lightbox.hidden) return;
+            if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'ArrowLeft') showImage(currentIndex - 1);
+            if (event.key === 'ArrowRight') showImage(currentIndex + 1);
+            if (event.key === 'Tab') {
+                const controls = [closeButton, document.getElementById('lightbox-prev'), document.getElementById('lightbox-next')];
+                const current = controls.indexOf(document.activeElement);
+                if (event.shiftKey && current <= 0) {
+                    event.preventDefault();
+                    controls[controls.length - 1].focus();
+                } else if (!event.shiftKey && current === controls.length - 1) {
+                    event.preventDefault();
+                    controls[0].focus();
+                }
+            }
+        });
+        lightbox.addEventListener('touchstart', event => {
+            touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+        lightbox.addEventListener('touchend', event => {
+            if (touchStartX === null) return;
+            const delta = event.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(delta) > 55) showImage(currentIndex + (delta < 0 ? 1 : -1));
+            touchStartX = null;
+        }, { passive: true });
     </script>
 </body>
 </html>
