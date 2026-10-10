@@ -240,22 +240,48 @@
     justify-content: center;
 }
 
-        }
-
-       
 .project-image img {
     display: block;
-    width: 65%;
-    height: 65%;
+    width: 43%;
+    height: 43%;
     object-fit: contain;
     object-position: center;
     transition: transform 0.35s ease;
 }
 
-        }
-
         .project:hover .project-image img {
             transform: scale(1.03);
+        }
+
+        /* CTA PARA ABRIR CADA PROJETO */
+        .project-cta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 28px;
+            padding-top: 15px;
+            border-top: 1px solid #555;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .project-cta-arrow {
+            font-size: 24px;
+            line-height: 1;
+            transition: transform 0.25s ease;
+        }
+
+        .project:hover .project-cta-arrow,
+        .project:focus-visible .project-cta-arrow {
+            transform: translate(4px, -4px);
+        }
+
+        .project:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: -4px;
         }
 
         /* INFORMAÇÕES DOS PROJETOS */
@@ -502,6 +528,11 @@
         }
 
         @media (max-width: 480px) {
+            .project-image img {
+                width: 48%;
+                height: 48%;
+            }
+
 
             .project-info {
                 grid-template-columns: 1fr;
@@ -645,6 +676,10 @@
 
                     </div>
 
+                <div class="project-cta">
+                        <span>Ver projetos</span>
+                        <span class="project-cta-arrow" aria-hidden="true">↗</span>
+                    </div>
                 </a>
 
 
@@ -676,6 +711,10 @@
 
                     </div>
 
+                <div class="project-cta">
+                        <span>Ver projetos</span>
+                        <span class="project-cta-arrow" aria-hidden="true">↗</span>
+                    </div>
                 </a>
 
 
@@ -688,6 +727,10 @@
                         <div><div class="project-number">03</div><h3>Colégio Energia</h3></div>
                         <div class="project-category">Conteúdo digital</div>
                     </div>
+                <div class="project-cta">
+                        <span>Ver projetos</span>
+                        <span class="project-cta-arrow" aria-hidden="true">↗</span>
+                    </div>
                 </a>
 
                 <!-- PROJETO 04 — AGÊNCIA WEBi -->
@@ -698,6 +741,10 @@
                     <div class="project-info">
                         <div><div class="project-number">04</div><h3>Agência WEBi</h3></div>
                         <div class="project-category">Conteúdo digital</div>
+                    </div>
+                <div class="project-cta">
+                        <span>Ver projetos</span>
+                        <span class="project-cta-arrow" aria-hidden="true">↗</span>
                     </div>
                 </a>
             </div>
