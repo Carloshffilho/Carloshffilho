@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Carlos Filho — Designer Gráfico</title>
@@ -19,9 +20,7 @@
 
     <style>
 
-        /* =========================
-           RESET
-        ========================= */
+        /* RESET */
 
         * {
             margin: 0;
@@ -36,7 +35,7 @@
         body {
             font-family: "Inter", sans-serif;
             background: #f5f5f3;
-            color: #111111;
+            color: #111;
             line-height: 1.4;
         }
 
@@ -45,10 +44,11 @@
             text-decoration: none;
         }
 
+        button {
+            font-family: inherit;
+        }
 
-        /* =========================
-           GRID
-        ========================= */
+        /* CONTAINER */
 
         .container {
             width: 100%;
@@ -57,10 +57,7 @@
             padding: 0 40px;
         }
 
-
-        /* =========================
-           HEADER
-        ========================= */
+        /* HEADER */
 
         header {
             min-height: 100vh;
@@ -86,6 +83,8 @@
         .top-info {
             display: flex;
             justify-content: space-between;
+            gap: 20px;
+
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.04em;
@@ -95,10 +94,7 @@
             color: #e30000;
         }
 
-
-        /* =========================
-           HERO
-        ========================= */
+        /* HERO */
 
         .hero {
             display: grid;
@@ -124,10 +120,7 @@
             font-weight: 600;
         }
 
-
-        /* =========================
-           INTRO
-        ========================= */
+        /* INTRO */
 
         .intro {
             border-top: 1px solid #111;
@@ -148,10 +141,7 @@
             letter-spacing: 0.04em;
         }
 
-
-        /* =========================
-           PROJECTS
-        ========================= */
+        /* PROJETOS */
 
         .projects-section {
             background: #111;
@@ -177,10 +167,7 @@
             line-height: 0.9;
         }
 
-
-        /* =========================
-           FILTERS
-        ========================= */
+        /* FILTROS */
 
         .filters {
             display: flex;
@@ -196,9 +183,7 @@
 
             padding: 9px 15px;
 
-            font-family: inherit;
             font-size: 12px;
-
             cursor: pointer;
 
             transition:
@@ -214,14 +199,11 @@
             border-color: #f5f5f3;
         }
 
-
-        /* =========================
-           PROJECT GRID
-        ========================= */
+        /* GRID DE PROJETOS */
 
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1px;
             background: #555;
             border: 1px solid #555;
@@ -229,9 +211,9 @@
 
         .project {
             background: #111;
-            min-height: 500px;
-
             padding: 30px;
+
+            min-width: 0;
 
             display: flex;
             flex-direction: column;
@@ -244,28 +226,29 @@
             background: #1a1a1a;
         }
 
-    ```css
+        /* IMAGENS QUADRADAS */
 
-.project-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    background: #e5e5e5;
-}
+        .project-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #e5e5e5;
+        }
 
-.project-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
+        .project-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.35s ease;
+        }
 
+        .project:hover .project-image img {
+            transform: scale(1.03);
+        }
 
-
-
-```
-
+        /* INFORMAÇÕES DOS PROJETOS */
 
         .project-info {
             display: grid;
@@ -294,10 +277,7 @@
             margin-bottom: 8px;
         }
 
-
-        /* =========================
-           ABOUT
-        ========================= */
+        /* SOBRE */
 
         .about-section {
             padding: 130px 0;
@@ -325,10 +305,7 @@
             font-weight: 700;
         }
 
-
-        /* =========================
-           EXPERIENCE
-        ========================= */
+        /* EXPERIÊNCIA */
 
         .experience-section {
             border-top: 1px solid #111;
@@ -353,7 +330,6 @@
 
             padding: 22px 0;
             border-top: 1px solid #bbb;
-
             font-size: 14px;
         }
 
@@ -373,15 +349,11 @@
             text-align: right;
         }
 
-
-        /* =========================
-           CONTACT
-        ========================= */
+        /* CONTATO */
 
         .contact-section {
             background: #e30000;
             color: #fff;
-
             padding: 120px 0;
         }
 
@@ -419,10 +391,7 @@
             padding-bottom: 4px;
         }
 
-
-        /* =========================
-           FOOTER
-        ========================= */
+        /* FOOTER */
 
         footer {
             background: #111;
@@ -436,12 +405,10 @@
         .footer-grid {
             display: flex;
             justify-content: space-between;
+            gap: 20px;
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
+        /* RESPONSIVIDADE */
 
         @media (max-width: 800px) {
 
@@ -501,10 +468,9 @@
             }
 
             .project {
-                min-height: 420px;
+                padding: 20px;
             }
 
-    
             .experience-item {
                 grid-template-columns: 1fr;
                 gap: 7px;
@@ -525,26 +491,35 @@
             }
         }
 
+        @media (max-width: 480px) {
+
+            .project-info {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .project-category {
+                text-align: left;
+            }
+
+            .project h3 {
+                font-size: 25px;
+            }
+        }
+
     </style>
 </head>
 
-
 <body>
 
-
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- HEADER -->
 
     <header>
 
         <div class="container">
-
             <div class="topbar">
 
-                <div class="logo">
-                    CF.
-                </div>
+                <div class="logo">CF.</div>
 
                 <div class="top-info">
                     <span>Designer gráfico</span>
@@ -552,12 +527,9 @@
                 </div>
 
             </div>
-
         </div>
 
-
         <div class="container">
-
             <div class="hero">
 
                 <h1>
@@ -566,22 +538,17 @@
                 </h1>
 
                 <div class="hero-description">
-
                     <p>
                         <strong>Designer gráfico e diretor de arte</strong>
                         interessado em identidade visual, comunicação,
                         cultura e experimentação.
                     </p>
-
                 </div>
 
             </div>
-
         </div>
 
-
         <div class="container">
-
             <div class="intro">
 
                 <div class="intro-number">
@@ -593,32 +560,23 @@
                 </div>
 
             </div>
-
         </div>
 
     </header>
 
 
-    <!-- =========================
-         PROJECTS
-    ========================== -->
+    <!-- PROJETOS -->
 
     <section class="projects-section" id="projetos">
 
         <div class="container">
 
             <div class="section-header">
-
-                <div class="section-number">
-                    01
-                </div>
-
-                <h2 class="section-title">
-                    Projetos
-                </h2>
-
+                <div class="section-number">01</div>
+                <h2 class="section-title">Projetos</h2>
             </div>
 
+            <!-- FILTROS -->
 
             <div class="filters">
 
@@ -648,139 +606,121 @@
 
             </div>
 
+            <!-- GRID -->
 
             <div class="project-grid">
 
 
-                <!-- PROJECT 01 -->
+                <!-- PROJETO 01 — FOCO RADICAL -->
 
-              
-<a class="project" href="foco-radical.html">
-
-    <div class="project-image">
-        <img
-            src="images/foco-radical/posts7.png"
-            alt="Projeto de design para a Foco Radical"
-        >
-    </div>
-
-    <div class="project-info">
-        <div>
-            <div class="project-number">01</div>
-            <h3>Foco Radical</h3>
-        </div>
-
-        <div class="project-category">
-            Campanhas<br>
-            Digital<br>
-            Materiais gráficos
-        </div>
-    </div>
-
-</a>
-
-<!-- PROJECT 02 -->
-<a class="project" href="canva.html">
-    <div class="project-image">
-        <img
-            src="images/canva/unnamed.jpg"
-            alt="Conteúdo digital desenvolvido para o Canva"
-        >
-    </div>
-
-    <div class="project-info">
-        <div>
-            <div class="project-number">02</div>
-            <h3>Canva</h3>
-        </div>
-
-        <div class="project-category">
-            Conteúdo digital
-        </div>
-    </div>
-</a>
-
-
-                <!-- PROJECT 03 -->
-
-                <article class="project"
-                    data-category="digital editorial">
+                <a
+                    class="project"
+                    href="foco-radical.html"
+                    data-category="campaign digital editorial"
+                >
 
                     <div class="project-image">
-                        imagem do projeto
+                        <img
+                            src="images/foco-radical/posts7.png"
+                            alt="Projeto de design para a Foco Radical"
+                        >
                     </div>
 
                     <div class="project-info">
 
                         <div>
-
-                            <div class="project-number">
-                                03
-                            </div>
-
-                            <h3>
-                                Colégio Energia
-                            </h3>
-
+                            <div class="project-number">01</div>
+                            <h3>Foco Radical</h3>
                         </div>
 
                         <div class="project-category">
+                            Campanhas<br>
                             Digital<br>
-                            Editorial
+                            Materiais gráficos
                         </div>
 
                     </div>
 
-                </article>
+                </a>
 
 
-                <!-- PROJECT 04 -->
+                <!-- PROJETO 02 — CANVA -->
 
-              
-<!-- PROJECT 03 -->
-<a class="project" href="colegio-energia.html">
-    <div class="project-image">
-        <img
-            src="images/colegio-energia/Colégio Energia 1.jpg"
-            alt="Conteúdo digital desenvolvido para o Colégio Energia"
-        >
-    </div>
-
-    <div class="project-info">
-        <div>
-            <div class="project-number">03</div>
-            <h3>Colégio Energia</h3>
-        </div>
-
-        <div class="project-category">
-            Conteúdo digital
-        </div>
-    </div>
-</a>
-
-
-
-                <!-- PROJECT 05 -->
-
-                <article class="project"
-                    data-category="authorial">
+                <a
+                    class="project"
+                    href="canva.html"
+                    data-category="digital"
+                >
 
                     <div class="project-image">
-                        projeto autoral
+                        <img
+                            src="images/canva/unnamed.jpg"
+                            alt="Conteúdo digital desenvolvido para o Canva"
+                        >
                     </div>
 
                     <div class="project-info">
 
                         <div>
+                            <div class="project-number">02</div>
+                            <h3>Canva</h3>
+                        </div>
 
-                            <div class="project-number">
-                                05
-                            </div>
+                        <div class="project-category">
+                            Conteúdo digital
+                        </div>
 
-                            <h3>
-                                Projetos autorais
-                            </h3>
+                    </div>
 
+                </a>
+
+
+                <!-- PROJETO 03 — COLÉGIO ENERGIA -->
+
+                <a
+                    class="project"
+                    href="colegio-energia.html"
+                    data-category="digital"
+                >
+
+                    <div class="project-image">
+                        <img
+                            src="images/colegio-energia/Colégio Energia 1.jpg"
+                            alt="Conteúdo digital desenvolvido para o Colégio Energia"
+                        >
+                    </div>
+
+                    <div class="project-info">
+
+                        <div>
+                            <div class="project-number">03</div>
+                            <h3>Colégio Energia</h3>
+                        </div>
+
+                        <div class="project-category">
+                            Conteúdo digital
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+                <!-- PROJETO 04 — AUTORAIS -->
+
+                <article
+                    class="project"
+                    data-category="authorial"
+                >
+
+                    <div class="project-image">
+                    </div>
+
+                    <div class="project-info">
+
+                        <div>
+                            <div class="project-number">04</div>
+                            <h3>Projetos autorais</h3>
                         </div>
 
                         <div class="project-category">
@@ -793,39 +733,14 @@
 
                 </article>
 
-
             </div>
 
         </div>
 
     </section>
 
-        
-<!-- PROJECT 03 -->
-<a class="project" href="colegio-energia.html">
-    <div class="project-image">
-        <img
-            src="images/colegio-energia/Colégio Energia 1.jpg"
-            alt="Conteúdo digital desenvolvido para o Colégio Energia"
-        >
-    </div>
 
-    <div class="project-info">
-        <div>
-            <div class="project-number">03</div>
-            <h3>Colégio Energia</h3>
-        </div>
-
-        <div class="project-category">
-            Conteúdo digital
-        </div>
-    </div>
-</a>
-
-
-    <!-- =========================
-         ABOUT
-    ========================== -->
+    <!-- SOBRE -->
 
     <section class="about-section" id="sobre">
 
@@ -838,16 +753,16 @@
                 </div>
 
                 <div class="about-text">
-
                     Designer gráfico com experiência em
-                    <strong>branding, comunicação,
-                    campanhas e conteúdo digital.</strong>
+                    <strong>
+                        branding, comunicação,
+                        campanhas e conteúdo digital.
+                    </strong>
 
                     <br><br>
 
                     Meu trabalho transita entre estratégia,
                     linguagem visual e experimentação.
-
                 </div>
 
             </div>
@@ -857,9 +772,7 @@
     </section>
 
 
-    <!-- =========================
-         EXPERIENCE
-    ========================== -->
+    <!-- EXPERIÊNCIA -->
 
     <section class="experience-section" id="experiencia">
 
@@ -871,151 +784,59 @@
                     03 / Experiência
                 </div>
 
-                <h2>
-                    Trajetória
-                </h2>
+                <h2>Trajetória</h2>
 
             </div>
 
-
             <div class="experience-list">
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2025 — 2026
-                    </div>
-
-                    <div class="experience-company">
-                        Foco Radical
-                    </div>
-
-                    <div class="experience-role">
-                        Designer gráfico
-                    </div>
-
+                    <div class="experience-year">2025 — 2026</div>
+                    <div class="experience-company">Foco Radical</div>
+                    <div class="experience-role">Designer gráfico</div>
                 </div>
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2021 — 2024
-                    </div>
-
-                    <div class="experience-company">
-                        Canva
-                    </div>
-
-                    <div class="experience-role">
-                        Creator
-                    </div>
-
+                    <div class="experience-year">2021 — 2024</div>
+                    <div class="experience-company">Canva</div>
+                    <div class="experience-role">Creator</div>
                 </div>
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2023 — 2024
-                    </div>
-
-                    <div class="experience-company">
-                        Colégio Energia
-                    </div>
-
-                    <div class="experience-role">
-                        Designer gráfico
-                    </div>
-
+                    <div class="experience-year">2023 — 2024</div>
+                    <div class="experience-company">Colégio Energia</div>
+                    <div class="experience-role">Designer gráfico</div>
                 </div>
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2022 — 2023
-                    </div>
-
-                    <div class="experience-company">
-                        Agência WEBi
-                    </div>
-
-                    <div class="experience-role">
-                        Designer gráfico
-                    </div>
-
+                    <div class="experience-year">2022 — 2023</div>
+                    <div class="experience-company">Agência WEBi</div>
+                    <div class="experience-role">Designer gráfico</div>
                 </div>
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2022
-                    </div>
-
-                    <div class="experience-company">
-                        SESC Santa Catarina
-                    </div>
-
-                    <div class="experience-role">
-                        Analista de comunicação
-                    </div>
-
+                    <div class="experience-year">2022</div>
+                    <div class="experience-company">SESC Santa Catarina</div>
+                    <div class="experience-role">Analista de comunicação</div>
                 </div>
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2021 — 2022
-                    </div>
-
-                    <div class="experience-company">
-                        Instituto São José
-                    </div>
-
-                    <div class="experience-role">
-                        Assistente de marketing
-                    </div>
-
+                    <div class="experience-year">2021 — 2022</div>
+                    <div class="experience-company">Instituto São José</div>
+                    <div class="experience-role">Assistente de marketing</div>
                 </div>
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2021
-                    </div>
-
-                    <div class="experience-company">
-                        Fontes Promotora
-                    </div>
-
-                    <div class="experience-role">
-                        Social Media
-                    </div>
-
+                    <div class="experience-year">2021</div>
+                    <div class="experience-company">Fontes Promotora</div>
+                    <div class="experience-role">Social Media</div>
                 </div>
 
-
                 <div class="experience-item">
-
-                    <div class="experience-year">
-                        2021
-                    </div>
-
-                    <div class="experience-company">
-                        BioMercado Brasil
-                    </div>
-
-                    <div class="experience-role">
-                        Assistente de marketing
-                    </div>
-
+                    <div class="experience-year">2021</div>
+                    <div class="experience-company">BioMercado Brasil</div>
+                    <div class="experience-role">Assistente de marketing</div>
                 </div>
-
 
             </div>
 
@@ -1024,9 +845,7 @@
     </section>
 
 
-    <!-- =========================
-         CONTACT
-    ========================== -->
+    <!-- CONTATO -->
 
     <section class="contact-section" id="contato">
 
@@ -1074,9 +893,7 @@
     </section>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -1084,9 +901,7 @@
 
             <div class="footer-grid">
 
-                <span>
-                    © 2026 Carlos Filho
-                </span>
+                <span>© 2026 Carlos Filho</span>
 
                 <span>
                     Designer gráfico / Diretor de arte
@@ -1099,9 +914,7 @@
     </footer>
 
 
-    <!-- =========================
-         JAVASCRIPT — FILTERS
-    ========================== -->
+    <!-- JAVASCRIPT — FILTROS -->
 
     <script>
 
@@ -1120,21 +933,17 @@
 
                 filter.classList.add("active");
 
-
                 projects.forEach(project => {
 
-                    if (
+                    const categories =
+                        (project.dataset.category || "").split(" ");
+
+                    const shouldShow =
                         category === "all" ||
-                        project.dataset.category.includes(category)
-                    ) {
+                        categories.includes(category);
 
-                        project.style.display = "flex";
-
-                    } else {
-
-                        project.style.display = "none";
-
-                    }
+                    project.style.display =
+                        shouldShow ? "flex" : "none";
 
                 });
 
@@ -1145,5 +954,4 @@
     </script>
 
 </body>
-
 </html>
