@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foco Radical — Carlos Filho</title>
+    <meta name="description" content="Seleção de projetos gráficos desenvolvidos para a Foco Radical por Carlos Filho.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f5f3;
+            color: #111;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1500px;
+            margin: auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 28px 0;
+            border-bottom: 1px solid #bbb;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -1px;
+        }
+
+        .back-link {
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: #e30000;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(54px, 10vw, 140px);
+            line-height: .88;
+            letter-spacing: -.085em;
+            margin-bottom: 35px;
+        }
+
+        .intro {
+            max-width: 620px;
+            font-size: clamp(18px, 2vw, 24px);
+            line-height: 1.4;
+        }
+
+        .category {
+            padding: 70px 0 90px;
+            border-top: 1px solid #bbb;
+        }
+
+        .category-heading {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .number {
+            color: #e30000;
+            font-size: 13px;
+            padding-top: 8px;
+        }
+
+        h2 {
+            font-size: clamp(30px, 5vw, 64px);
+            letter-spacing: -.06em;
+            line-height: 1;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .gallery figure {
+            background: #e8e8e5;
+            overflow: hidden;
+        }
+
+        .gallery img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .gallery figcaption {
+            padding: 12px 14px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            margin-top: 30px;
+            font-size: 12px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #111;
+            padding-bottom: 5px;
+        }
+
+        footer {
+            background: #111;
+            color: #fff;
+            padding: 25px 0;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding-top: 75px;
+                padding-bottom: 60px;
+            }
+
+            .category {
+                padding: 55px 0 65px;
+            }
+
+            .category-heading {
+                grid-template-columns: 35px 1fr;
+                gap: 10px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container topbar">
+            <a class="logo" href="index.html">CF.</a>
+            <a class="back-link" href="index.html">← Voltar ao portfólio</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="container hero">
+            <p class="eyebrow">Projeto selecionado / 01</p>
+            <h1>FOCO<br>RADICAL</h1>
+            <p class="intro">
+                Seleção de materiais gráficos, comunicação para eventos
+                e conteúdo digital desenvolvidos para diferentes frentes
+                da Foco Radical.
+            </p>
+        </section>
+
+        <section class="category" id="backdrops">
+            <div class="container">
+                <div class="category-heading">
+                    <span class="number">01</span>
+                    <h2>Backdrops<br>& Estandes</h2>
+                </div>
+
+                <div class="gallery">
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes1.jpg" alt="Backdrop e estande 1" loading="lazy"><figcaption>Backdrop & estande / 01</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes2.jpg" alt="Backdrop e estande 2" loading="lazy"><figcaption>Backdrop & estande / 02</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes3.jpg" alt="Backdrop e estande 3" loading="lazy"><figcaption>Backdrop & estande / 03</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes4.jpg" alt="Backdrop e estande 4" loading="lazy"><figcaption>Backdrop & estande / 04</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes5.jpg" alt="Backdrop e estande 5" loading="lazy"><figcaption>Backdrop & estande / 05</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes6.jpg" alt="Backdrop e estande 6" loading="lazy"><figcaption>Backdrop & estande / 06</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes7.jpg" alt="Backdrop e estande 7" loading="lazy"><figcaption>Backdrop & estande / 07</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes8.jpg" alt="Backdrop e estande 8" loading="lazy"><figcaption>Backdrop & estande / 08</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes9.png" alt="Backdrop e estande 9" loading="lazy"><figcaption>Backdrop & estande / 09</figcaption></figure>
+                    <figure><img src="images/foco-radical/Backdrops%20e%20Estandes10.png" alt="Backdrop e estande 10" loading="lazy"><figcaption>Backdrop & estande / 10</figcaption></figure>
+                </div>
+                <a class="back-to-top" href="#">Voltar ao topo ↑</a>
+            </div>
+        </section>
+
+        <section class="category" id="materiais-graficos">
+            <div class="container">
+                <div class="category-heading">
+                    <span class="number">02</span>
+                    <h2>Materiais<br>Gráficos</h2>
+                </div>
+
+                <div class="gallery">
+                    <figure><img src="images/foco-radical/flyers1.jpeg" alt="Flyer 1" loading="lazy"><figcaption>Flyer / 01</figcaption></figure>
+                    <figure><img src="images/foco-radical/flyers2.png" alt="Flyer 2" loading="lazy"><figcaption>Flyer / 02</figcaption></figure>
+                    <figure><img src="images/foco-radical/flyers3.png" alt="Flyer 3" loading="lazy"><figcaption>Flyer / 03</figcaption></figure>
+                    <figure><img src="images/foco-radical/flyers4.png" alt="Flyer 4" loading="lazy"><figcaption>Flyer / 04</figcaption></figure>
+                    <figure><img src="images/foco-radical/flyers5.png" alt="Flyer 5" loading="lazy"><figcaption>Flyer / 05</figcaption></figure>
+                    <figure><img src="images/foco-radical/flyers6.png" alt="Flyer 6" loading="lazy"><figcaption>Flyer / 06</figcaption></figure>
+                    <figure><img src="images/foco-radical/flyers7.png" alt="Flyer 7" loading="lazy"><figcaption>Flyer / 07</figcaption></figure>
+                </div>
+                <a class="back-to-top" href="#">Voltar ao topo ↑</a>
+            </div>
+        </section>
+
+        <section class="category" id="redes-sociais">
+            <div class="container">
+                <div class="category-heading">
+                    <span class="number">03</span>
+                    <h2>Materiais para<br>Redes Sociais</h2>
+                </div>
+
+                <div class="gallery">
+                    <figure><img src="images/foco-radical/posts1.jpg" alt="Post para redes sociais 1" loading="lazy"><figcaption>Redes sociais / 01</figcaption></figure>
+                    <figure><img src="images/foco-radical/posts2.jpg" alt="Post para redes sociais 2" loading="lazy"><figcaption>Redes sociais / 02</figcaption></figure>
+                    <figure><img src="images/foco-radical/posts3.png" alt="Post para redes sociais 3" loading="lazy"><figcaption>Redes sociais / 03</figcaption></figure>
+                    <figure><img src="images/foco-radical/post4.png" alt="Post para redes sociais 4" loading="lazy"><figcaption>Redes sociais / 04</figcaption></figure>
+                    <figure><img src="images/foco-radical/posts5.png" alt="Post para redes sociais 5" loading="lazy"><figcaption>Redes sociais / 05</figcaption></figure>
+                    <figure><img src="images/foco-radical/posts6.png" alt="Post para redes sociais 6" loading="lazy"><figcaption>Redes sociais / 06</figcaption></figure>
+                    <figure><img src="images/foco-radical/posts7.png" alt="Post para redes sociais 7" loading="lazy"><figcaption>Redes sociais / 07</figcaption></figure>
+                    <figure><img src="images/foco-radical/post8.png" alt="Post para redes sociais 8" loading="lazy"><figcaption>Redes sociais / 08</figcaption></figure>
+                    <figure><img src="images/foco-radical/post9.png" alt="Post para redes sociais 9" loading="lazy"><figcaption>Redes sociais / 09</figcaption></figure>
+                    <figure><img src="images/foco-radical/post10.png" alt="Post para redes sociais 10" loading="lazy"><figcaption>Redes sociais / 10</figcaption></figure>
+                    <figure><img src="images/foco-radical/post11.png" alt="Post para redes sociais 11" loading="lazy"><figcaption>Redes sociais / 11</figcaption></figure>
+                    <figure><img src="images/foco-radical/post12.png" alt="Post para redes sociais 12" loading="lazy"><figcaption>Redes sociais / 12</figcaption></figure>
+                    <figure><img src="images/foco-radical/post13.png" alt="Post para redes sociais 13" loading="lazy"><figcaption>Redes sociais / 13</figcaption></figure>
+                    <figure><img src="images/foco-radical/post14.png" alt="Post para redes sociais 14" loading="lazy"><figcaption>Redes sociais / 14</figcaption></figure>
+                    <figure><img src="images/foco-radical/post15.png" alt="Post para redes sociais 15" loading="lazy"><figcaption>Redes sociais / 15</figcaption></figure>
+                </div>
+                <a class="back-to-top" href="#">Voltar ao topo ↑</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <span>© 2026 Carlos Filho</span>
+            <span>Designer gráfico / Direção de arte</span>
+        </div>
+    </footer>
+</body>
+</html>
